@@ -8,6 +8,8 @@ jobs:
       - run:
           name: Determine which projects have changed and trigger the builds
           command: |
+            echo -e "CIRCLE_COMPARE_URL ${CIRCLE_COMPARE_URL}"
+            
             git diff --no-commit-id --name-only -r `git log -n 2 --oneline --pretty=format:"%h" | tail -n1` | cut -d/ -f1 | sort -u > projects
             echo -e "Modified directories:`cat projects`\n"
 
